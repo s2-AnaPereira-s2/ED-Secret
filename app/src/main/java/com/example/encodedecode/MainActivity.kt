@@ -1,11 +1,10 @@
 package com.example.encodedecode
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.textfield.TextInputEditText
 
 class MainActivity : AppCompatActivity() {
@@ -67,8 +66,10 @@ class MainActivity : AppCompatActivity() {
                     result.add(new_letter)
                 }
             }
-            val KeepSecret = result.joinToString("")
-            println(KeepSecret)
+            val code = result.joinToString("")
+            val RevealCode = Intent(this, EncodeActivity::class.java)
+            RevealCode.putExtra("CODE", code)
+            startActivity(RevealCode)
         }
 
         decode.setOnClickListener {
@@ -88,8 +89,10 @@ class MainActivity : AppCompatActivity() {
                     result.add(new_letter)
                 }
             }
-            val secretReveal = result.joinToString("")
-            println(secretReveal)
+            val codeDecode = result.joinToString("")
+            val RevealSecret = Intent(this, DecodeActivity::class.java)
+            RevealSecret.putExtra("CODEDECODE", codeDecode)
+            startActivity(RevealSecret)
         }
     }
 }

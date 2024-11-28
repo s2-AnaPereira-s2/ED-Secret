@@ -5,14 +5,16 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     tools:context=".MainActivity">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="84dp"
         android:text="ED Secret"
+        android:textColor="@color/green"
         android:textSize="40sp"
-        android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -22,16 +24,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
+        app:hintEnabled="false"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintVertical_bias="0.402">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/messageedittext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Write here your secret" />
+            android:background="@drawable/textfield"
+            android:hint="Secret"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -40,6 +47,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
+        app:hintEnabled="false"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/messagelayout">
 
@@ -47,17 +55,21 @@
             android:id="@+id/shiftnumberet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Write here your shift number from 0 to 26" />
+            android:textColor="@color/black"
+            android:background="@drawable/textfield"
+            android:hint="Shift-number (0 to 26)"
+            android:textColorHint="@color/black"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/encode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="168dp"
         android:text="Encode"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.314"
+        app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/shiftnumberlayout" />
 
@@ -65,9 +77,10 @@
         android:id="@+id/decode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="168dp"
         android:text="Decode"
+        android:textColor="@color/black"
         app:layout_constraintStart_toEndOf="@id/encode"
         app:layout_constraintTop_toBottomOf="@id/shiftnumberlayout" />
 

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 
 class MainActivity : AppCompatActivity() {
@@ -12,7 +13,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
-
 
         val alphabet = arrayOf(
             "a",
@@ -48,63 +48,91 @@ class MainActivity : AppCompatActivity() {
         val encode = findViewById<Button>(R.id.encode)
         val decode = findViewById<Button>(R.id.decode)
 
-
         encode.setOnClickListener {
-            val result = mutableListOf<Char>()
             val secret = inputsecret.text.toString()
-            val shift = inputshift.text.toString().toInt()
+            val shift = inputshift.text.toString().toIntOrNull()
+            val result = mutableListOf<Char>()
 
-            for (letter in secret) {
-                if (letter.lowercaseChar()
-                        .toString() !in alphabet
-                ) { // Convert Char to String for comparison
-                    result.add(letter) // Add the letter to the result list
-                }
-                else {
-                    val index_new_letter = (alphabet.indexOf(letter.lowercaseChar().toString()) + shift)
-                    if (index_new_letter < 25) {
-                        val new_letter = alphabet[index_new_letter].first()
-                        result.add(new_letter)
-                        }
+            if (secret.isEmpty() || shift == null) {
+            Snackbar
+                .make(encode, "Complete all fields", Snackbar.LENGTH_SHORT)
+                .show()
+            }
+
+            else if (shift > 26) {
+                Snackbar
+                    .make(encode, "Shift number must be between 0 and 26", Snackbar.LENGTH_SHORT)
+                    .show()
+            }
+
+            else {
+                for (letter in secret) {
+                    if (letter.lowercaseChar()
+                            .toString() !in alphabet
+                    ) { // Convert Char to String for comparison
+                        result.add(letter) // Add the letter to the result list
+                    }
                     else {
-                        val new_letter = alphabet[index_new_letter - 26].first()
-                        result.add(new_letter)
+                        val index_new_letter =
+                            (alphabet.indexOf(letter.lowercaseChar().toString()) + shift)
+
+                        if (index_new_letter < 25) {
+                            val new_letter = alphabet[index_new_letter].first()
+                            result.add(new_letter)
+                        } else {
+                            val new_letter = alphabet[index_new_letter - 26].first()
+                            result.add(new_letter)
+                        }
                     }
                 }
+                val code = result.joinToString("")
+                val RevealCode = Intent(this, EncodeActivity::class.java)
+                RevealCode.putExtra("CODE", code)
+                startActivity(RevealCode)
             }
-            val code = result.joinToString("")
-            val RevealCode = Intent(this, EncodeActivity::class.java)
-            RevealCode.putExtra("CODE", code)
-            startActivity(RevealCode)
         }
 
         decode.setOnClickListener {
-            val result = mutableListOf<Char>()
             val secret = inputsecret.text.toString()
-            val shift = inputshift.text.toString().toInt()
+            val shift = inputshift.text.toString().toIntOrNull()
+            val result = mutableListOf<Char>()
 
-            for (letter in secret) {
-                if (letter.lowercaseChar()
-                        .toString() !in alphabet
-                ) { // Convert Char to String for comparison
-                    result.add(letter) // Add the letter to the result list
-                }
-                else {
-                    val index_new_letter = (alphabet.indexOf(letter.lowercaseChar().toString()) - shift)
-                    if (index_new_letter < 0){
-                        val new_letter = alphabet[index_new_letter + 26].first()
-                        result.add(new_letter)
+            if (secret.isEmpty() || shift == null ) {
+            Snackbar
+                .make(decode, "Complete all fields", Snackbar.LENGTH_SHORT)
+                .show()
+            }
+
+            else if (shift > 26) {
+                Snackbar
+                    .make(decode, "Shift number must be between 0 and 26", Snackbar.LENGTH_SHORT)
+                    .show()
+            }
+
+            else {
+                for (letter in secret) {
+                    if (letter.lowercaseChar()
+                            .toString() !in alphabet
+                    ) { // Convert Char to String for comparison
+                        result.add(letter) // Add the letter to the result list
                     }
                     else {
-                        val new_letter = alphabet[index_new_letter].first()
-                        result.add(new_letter)
+                        val index_new_letter = (alphabet.indexOf(letter.lowercaseChar().toString()) - shift)
+                        if (index_new_letter < 0){
+                            val new_letter = alphabet[index_new_letter + 26].first()
+                            result.add(new_letter)
+                        }
+                        else {
+                            val new_letter = alphabet[index_new_letter].first()
+                            result.add(new_letter)
+                        }
                     }
                 }
+                val codeDecode = result.joinToString("")
+                val RevealSecret = Intent(this, DecodeActivity::class.java)
+                RevealSecret.putExtra("CODEDECODE", codeDecode)
+                startActivity(RevealSecret)
             }
-            val codeDecode = result.joinToString("")
-            val RevealSecret = Intent(this, DecodeActivity::class.java)
-            RevealSecret.putExtra("CODEDECODE", codeDecode)
-            startActivity(RevealSecret)
         }
     }
 }

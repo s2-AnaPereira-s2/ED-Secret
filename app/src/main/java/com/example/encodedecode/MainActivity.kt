@@ -62,8 +62,14 @@ class MainActivity : AppCompatActivity() {
                 }
                 else {
                     val index_new_letter = (alphabet.indexOf(letter.lowercaseChar().toString()) + shift)
-                    val new_letter = alphabet[index_new_letter].first()
-                    result.add(new_letter)
+                    if (index_new_letter < 25) {
+                        val new_letter = alphabet[index_new_letter].first()
+                        result.add(new_letter)
+                        }
+                    else {
+                        val new_letter = alphabet[index_new_letter - 26].first()
+                        result.add(new_letter)
+                    }
                 }
             }
             val code = result.joinToString("")
@@ -85,8 +91,14 @@ class MainActivity : AppCompatActivity() {
                 }
                 else {
                     val index_new_letter = (alphabet.indexOf(letter.lowercaseChar().toString()) - shift)
-                    val new_letter = alphabet[index_new_letter].first()
-                    result.add(new_letter)
+                    if (index_new_letter < 0){
+                        val new_letter = alphabet[index_new_letter + 26].first()
+                        result.add(new_letter)
+                    }
+                    else {
+                        val new_letter = alphabet[index_new_letter].first()
+                        result.add(new_letter)
+                    }
                 }
             }
             val codeDecode = result.joinToString("")

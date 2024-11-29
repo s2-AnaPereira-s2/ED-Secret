@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="@drawable/app_bg"
     tools:context=".MainActivity">
 
     <TextView
@@ -55,10 +55,10 @@
             android:id="@+id/shiftnumberet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
             android:background="@drawable/textfield"
             android:hint="Shift-number (0 to 26)"
-            android:textColorHint="@color/black"/>
+            android:textColor="@color/black"
+            android:textColorHint="@color/black" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button

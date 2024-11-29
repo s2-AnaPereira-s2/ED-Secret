@@ -5,7 +5,7 @@
     android:id="@+id/encode"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="@drawable/app_bg"
     tools:context=".EncodeActivity">
 
     <TextView
@@ -30,8 +30,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="152dp"
-        android:padding="15dp"
         android:background="@drawable/textfield"
+        android:padding="15dp"
         android:text="result"
         android:textColor="@color/black"
         android:textSize="20sp"
